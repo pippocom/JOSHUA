@@ -1,0 +1,130 @@
+<!doctype html>
+<!--
+  Copyright (C) 2025-2026 Marco Iannacone
+  SPDX-License-Identifier: AGPL-3.0-only
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JOSHUA — An Interactive WarGames Tribute by Marco Iannacone</title>
+  <meta name="description" content="JOSHUA is an open-source interactive web application by Marco Iannacone, created as a tribute to the 1983 film WarGames and as a reminder that not every decision that can be delegated to machines should be.">
+  <!-- SEO_META -->
+  <!-- Self-contained app: every script, stylesheet, and asset is same-origin,
+       and there are no inline scripts/styles (the report panel's button margin
+       is a CSS rule, not an inline style). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <link rel="stylesheet" href="styles/joshua.css">
+</head>
+<body class="joshua-body">
+
+  <!-- Splash / credits. Visible alone at load. No AudioContext, no sound,
+       no navigation happens until BOOT JOSHUA TERMINAL is clicked. -->
+  <main id="splashScreen" class="joshua-launch">
+    <section class="joshua-launch-card">
+      <div class="launch-meta">
+        <div class="launch-kicker">HUMAN-SYSTEMS / INTERACTIVE-FICTION <span id="splashVersion" class="launch-version"></span></div>
+        <a id="langSwitchLink" class="launch-lang" href="#" hreflang="it">IT</a>
+      </div>
+      <h1><span>JOSHUA</span><span>TERMINAL</span></h1>
+      <p id="splashLead" class="leadline"></p>
+      <p id="splashPara1"></p>
+      <p id="splashPara2"></p>
+      <div class="launch-actions">
+        <button type="button" id="bootButton" class="launch-button" autofocus>BOOT JOSHUA TERMINAL</button>
+      </div>
+    </section>
+    <p id="splashCredit" class="launch-credit"></p>
+  </main>
+
+  <!-- The game itself. Hidden until BOOT is pressed. -->
+  <div id="crt" class="crt hidden">
+    <div class="scanlines" aria-hidden="true"></div>
+    <main id="app" class="app">
+      <section id="terminalPanel" class="terminal-panel">
+        <div class="topbar">
+          <span>JOSHUA TERMINAL</span>
+          <button type="button" id="muteButton" class="ghost-button" aria-label="MUTE AUDIO" aria-pressed="false">SOUND: ON</button>
+        </div>
+        <div id="terminalOutput" class="terminal-output"></div>
+        <form id="commandForm" class="command-form">
+          <span class="prompt">JOSHUA&gt;</span>
+          <input id="commandInput" autocomplete="off" spellcheck="false">
+          <button type="submit">SEND</button>
+        </form>
+      </section>
+
+      <section id="ticScreen" class="tic-screen hidden" aria-label="TIC-TAC-TOE">
+        <div class="tic-shell">
+          <div class="tic-title">TIC-TAC-TOE</div>
+          <div id="ticBoard" class="tic-board"></div>
+          <div id="ticInstruction" class="tic-instruction"></div>
+          <div id="ticStatus" class="tic-status"></div>
+          <div id="ticOverlay" class="tic-overlay hidden"></div>
+        </div>
+      </section>
+
+      <section id="warRoom" class="war-room hidden" aria-label="GLOBAL THERMONUCLEAR WAR SIMULATION">
+        <div class="war-header">
+          <div>
+            <div class="war-title">GLOBAL THERMONUCLEAR WAR</div>
+            <div id="warSubtitle" class="war-subtitle"></div>
+          </div>
+          <button id="abortWar" class="ghost-button">ABORT</button>
+        </div>
+        <div class="war-grid">
+          <aside class="status-panel">
+            <h2>STATUS</h2>
+            <dl id="statusData"></dl>
+          </aside>
+          <div class="map-stage">
+            <div id="mapViewport" class="map-viewport">
+              <img class="world-map" src="assets/maps/world.svg" alt="world map">
+              <svg id="warOverlay" class="war-overlay" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+            </div>
+          </div>
+          <aside class="event-panel">
+            <h2>EVENT LOG</h2>
+            <div id="eventLog" class="event-log"></div>
+          </aside>
+        </div>
+        <div id="reportPanel" class="report-panel hidden"></div>
+      </section>
+
+      <section id="finalScreen" class="final-screen hidden">
+        <div id="finalText" class="final-text"></div>
+        <button type="button" id="returnConsole" class="return-button">RETURN TO JOSHUA TERMINAL</button>
+      </section>
+    </main>
+
+    <!-- Single visually-hidden live region. Only meaningful state transitions
+         are written here (see announce() in game.js); the terminal output and
+         the war event log are deliberately NOT live regions, so screen readers
+         are not flooded with every typed character, trajectory, or impact. -->
+    <div id="liveStatus" class="visually-hidden" role="status"></div>
+  </div>
+
+  <script src="app/version.js"></script>
+  <script src="data/content.en.js"></script>
+  <script src="data/content.it.js"></script>
+  <script src="data/nodes.js"></script>
+  <script src="data/scenarios.js"></script>
+  <script src="data/warViews.js"></script>
+  <script src="data/warCityRegions.js"></script>
+  <script src="data/warRoutes.js"></script>
+  <script src="data/warStrategyProfiles.js"></script>
+  <script src="data/ticTacToeZeroSequences.js"></script>
+  <script src="audio/speech.js"></script>
+  <script src="audio/warSoundscape.js"></script>
+  <script src="audio/audioManager.js"></script>
+  <script src="app/presentation.js"></script>
+  <script src="app/finalSequence.js"></script>
+  <script src="app/bootSequence.js"></script>
+  <script src="games/ticTacToeEngine.js"></script>
+  <script src="games/hangmanEngine.js"></script>
+  <script src="games/sudokuEngine.js"></script>
+  <script src="war/warModel.js"></script>
+  <script src="war/warMap.js"></script>
+  <script src="app/game.js"></script>
+</body>
+</html>

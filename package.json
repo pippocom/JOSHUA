@@ -1,0 +1,21 @@
+{
+  "name": "joshua-terminal",
+  "version": "0.69.0",
+  "private": true,
+  "description": "JOSHUA Terminal — client-side, no backend, no runtime dependencies.",
+  "author": {
+    "name": "Marco Iannacone",
+    "email": "ianna@pippo.com",
+    "url": "https://pippo.com/"
+  },
+  "license": "AGPL-3.0-only",
+  "homepage": "https://pippo.com/human-systems/interactive-fiction/joshua/",
+  "scripts": {
+    "test": "node --test tests/unit/*.test.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:browser": "playwright test --config=playwright.config.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}

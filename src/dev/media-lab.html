@@ -1,0 +1,133 @@
+<!doctype html>
+<!--
+  Copyright (C) 2025-2026 Marco Iannacone
+  SPDX-License-Identifier: AGPL-3.0-only
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JOSHUA — Media Lab (dev only)</title>
+  <!--
+    Development-only audition page for the two synthesized Web Audio effects
+    (boot noise, TIC-TAC-TOE crash) and the four TTS questions being tuned
+    (boot play-prompt EN/IT, final chess question EN/IT), across three
+    punctuation variants each. NOT linked from the normal application
+    (src/index.html) and does not affect runtime behavior. Manual/perceptual
+    evaluation only — nothing here is persisted.
+  -->
+  <style>
+    :root{--bg:#050806;--panel:#0b1710;--ink:#bfffd0;--dim:#6dae7a;--amber:#ffd166;--line:rgba(108,255,141,.25);--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);padding:24px;line-height:1.5}
+    h1{color:var(--amber);font-size:16px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 4px}
+    p.note{color:var(--dim);font-size:13px;margin:0 0 20px}
+    section{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:18px;background:var(--panel)}
+    section h2{margin:0 0 12px;font-size:13px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase}
+    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+    button{font:inherit;background:rgba(108,255,141,.1);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer}
+    button:hover{border-color:var(--ink)}
+    select{font:inherit;background:#04140a;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+    label{font-size:12px;color:var(--dim)}
+    fieldset{border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:0}
+    legend{font-size:12px;color:var(--dim);padding:0 4px}
+    #status, #spokenTextDisplay, #typedOutput, #warSoundscapeStatus{font-size:13px;background:#000;border:1px solid var(--line);border-radius:6px;padding:10px;min-height:1.4em;white-space:pre-wrap;word-break:break-word}
+    #spokenTextDisplay{color:var(--amber)}
+    .id{color:var(--dim);font-size:11px}
+  </style>
+</head>
+<body>
+  <h1>JOSHUA Media Lab</h1>
+  <p class="note">Development-only audition page. Not linked from the game. Uses audioManager.js and speech.js directly — no audio algorithms are duplicated here.</p>
+
+  <section id="audioSection" aria-label="Web Audio audition">
+    <h2>Audio</h2>
+    <div class="row">
+      <button type="button" id="enableAudioButton">ENABLE AUDIO</button>
+      <button type="button" id="playBootButton">PLAY BOOT</button>
+      <button type="button" id="playCrashButton">PLAY TIC TAC TOE CRASH</button>
+      <button type="button" id="playXMarkButton">PLAY X MARK</button>
+      <button type="button" id="playOMarkButton">PLAY O MARK</button>
+      <button type="button" id="stopAudioButton">STOP</button>
+      <button type="button" id="muteAudioButton" aria-pressed="false">MUTE</button>
+    </div>
+    <div id="status">AudioContext: not created</div>
+  </section>
+
+  <section id="warSoundscapeSection" aria-label="War soundscape audition">
+    <h2>War Soundscape</h2>
+    <p class="note">Same JoshuaAudioManager API and DSP as the GLOBAL THERMONUCLEAR WAR simulation — nothing here is a separate implementation.</p>
+    <div class="row">
+      <button type="button" id="startWarSoundscapeButton">START WAR SOUNDSCAPE</button>
+      <button type="button" id="stopWarSoundscapeButton">STOP WAR SOUNDSCAPE</button>
+      <label for="warIntensitySlider">INTENSITY</label>
+      <input type="range" id="warIntensitySlider" min="0" max="100" value="0">
+      <span class="id" id="warIntensityValue">0%</span>
+    </div>
+    <div class="row">
+      <button type="button" id="playMissileLaunchButton">PLAY MISSILE LAUNCH</button>
+      <button type="button" id="playMissileFlightButton">PLAY MISSILE FLIGHT</button>
+      <button type="button" id="playNormalImpactButton">PLAY NORMAL IMPACT</button>
+      <button type="button" id="playLargeImpactButton">PLAY LARGE IMPACT</button>
+      <button type="button" id="playFireBurstButton">PLAY AUTOMATIC FIRE BURST</button>
+    </div>
+    <div class="row">
+      <button type="button" id="demoEscalationButton">DEMO ESCALATION (~6s)</button>
+    </div>
+    <div id="warSoundscapeStatus">not running</div>
+  </section>
+
+  <section id="ttsSection" aria-label="Text-to-speech audition">
+    <h2>TTS</h2>
+    <div class="row">
+      <label for="langSelect">Language</label>
+      <select id="langSelect">
+        <option value="en">EN</option>
+        <option value="it">IT</option>
+      </select>
+
+      <label for="phraseSelect">Phrase</label>
+      <select id="phraseSelect">
+        <option value="boot">Boot question</option>
+        <option value="chess">Final chess question</option>
+      </select>
+
+      <label for="voiceSelect">Voice</label>
+      <select id="voiceSelect">
+        <option value="">(auto — same as runtime)</option>
+      </select>
+    </div>
+    <div class="row">
+      <span class="id" id="voiceFallbackNote"></span>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <legend>Punctuation variant (diagnostic only — runtime always uses a single "?")</legend>
+        <label><input type="radio" name="variant" value="single" checked> A. single "?"</label>
+        &nbsp;
+        <label><input type="radio" name="variant" value="double"> B. double "??"</label>
+        &nbsp;
+        <label><input type="radio" name="variant" value="ellipsis"> C. ellipsis "…?"</label>
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <button type="button" id="speakButton">SPEAK</button>
+      <button type="button" id="stopSpeechButton">STOP SPEECH</button>
+    </div>
+
+    <div class="row" style="flex-direction:column;align-items:stretch;gap:6px">
+      <div class="id">displayText (typed, retro uppercase):</div>
+      <div id="typedOutput"></div>
+      <div class="id">spokenText (sent to SpeechSynthesisUtterance):</div>
+      <div id="spokenTextDisplay"></div>
+    </div>
+  </section>
+
+  <script src="../audio/speech.js"></script>
+  <script src="../audio/warSoundscape.js"></script>
+  <script src="../audio/audioManager.js"></script>
+  <script src="media-lab.js"></script>
+</body>
+</html>
