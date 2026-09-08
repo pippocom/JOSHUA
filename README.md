@@ -90,9 +90,9 @@ The app is keyboard-operable, labels its controls, announces meaningful state ch
 
 ## Companion article
 
-A companion article about the ideas behind JOSHUA and why this project was released as open source is forthcoming on Codemotion.
+A companion article about the ideas behind JOSHUA and why this project was released as open source is published on Codemotion.
 
-[Codemotion article — forthcoming]
+https://www.codemotion.com/magazine/it/dev-life-it/joshua-e-ora-open-source-gli-arsenali-sono-cambiati-dal-1983-lesito-no/
 
 ## A note on realism
 

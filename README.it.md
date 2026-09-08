@@ -91,9 +91,9 @@ L'app è utilizzabile da tastiera, etichetta i propri controlli, annuncia i camb
 
 ## Articolo di accompagnamento
 
-Un articolo di accompagnamento sulle idee alla base di JOSHUA e sul perché questo progetto è stato pubblicato come open source è in arrivo su Codemotion.
+Un articolo di accompagnamento sulle idee alla base di JOSHUA e sul perché questo progetto è stato pubblicato come open source è pubblicato su Codemotion.
 
-[Articolo Codemotion — in arrivo]
+https://www.codemotion.com/magazine/it/dev-life-it/joshua-e-ora-open-source-gli-arsenali-sono-cambiati-dal-1983-lesito-no/
 
 ## Una nota sul realismo
 
