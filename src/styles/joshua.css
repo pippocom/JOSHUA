@@ -754,6 +754,22 @@ body {
   letter-spacing: .08em;
 }
 
+.launch-source {
+  display: inline-block;
+  margin: 10px 14px 0;
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(109,174,122,.55);
+}
+
+.launch-source:hover,
+.launch-source:focus-visible {
+  color: var(--cyan);
+  border-bottom-color: rgba(125,211,252,.55);
+}
+
 @media (max-width: 900px) {
   .app {
     width: 100%;
@@ -826,6 +842,9 @@ body {
     text-align: center;
   }
   .launch-credit {
+    padding: 0 16px 24px;
+  }
+  .launch-source {
     padding: 0 16px 24px;
   }
 }
