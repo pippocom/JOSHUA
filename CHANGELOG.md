@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.69.1] - 2026-09-15
+
+Mobile warning on the initial splash screen.
+
+- Show a warning on the initial splash screen for Android/iOS/mobile/touch devices
+- The warning supports Italian locale detection
+
 ## [0.69.0] - 2026-08-29
 
 First public open-source release of JOSHUA Terminal.

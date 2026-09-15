@@ -96,9 +96,10 @@ test('PLAYING.md and PLAYING.it.md do not spoil the closing sequence', () => {
   }
 });
 
-test('CHANGELOG.md documents 0.69.0 and an Unreleased section, invents no earlier releases', () => {
+test('CHANGELOG.md documents 0.69.1, 0.69.0, and an Unreleased section, invents no earlier releases', () => {
   const changelog = fs.readFileSync(path.join(ROOT, 'CHANGELOG.md'), 'utf8');
   assert.match(changelog, /## \[Unreleased\]/);
+  assert.match(changelog, /## \[0\.69\.1\] - 2026-09-15/);
   assert.match(changelog, /## \[0\.69\.0\] - 2026-08-29/);
   assert.ok(!/## \[0\.[0-6][0-8]\.\d+\]/.test(changelog), 'no earlier version sections should be invented');
 });

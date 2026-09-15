@@ -1,6 +1,6 @@
 {
   "name": "joshua-terminal",
-  "version": "0.69.0",
+  "version": "0.69.1",
   "private": true,
   "description": "JOSHUA Terminal — client-side, no backend, no runtime dependencies.",
   "author": {

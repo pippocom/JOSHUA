@@ -146,7 +146,7 @@ test.describe('regression: splash and war soundscape are unaffected by this chan
   test('splash layout controls and war soundscape API are unchanged', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('#langSwitchLink')).toBeVisible();
-    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69');
+    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69.1');
     await expect(page.locator('#bootButton')).toHaveText('BOOT JOSHUA TERMINAL');
 
     await page.locator('#bootButton').click();

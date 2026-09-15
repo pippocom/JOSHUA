@@ -30,14 +30,14 @@ function walk(dir) {
   return out;
 }
 
-test('version.js is the canonical source: semver 0.69.0, displayVersion "v. 0.69"', () => {
-  assert.equal(JoshuaVersion.semver, '0.69.0');
-  assert.equal(JoshuaVersion.displayVersion, 'v. 0.69');
+test('version.js is the canonical source: semver 0.69.1, displayVersion "v. 0.69.1"', () => {
+  assert.equal(JoshuaVersion.semver, '0.69.1');
+  assert.equal(JoshuaVersion.displayVersion, 'v. 0.69.1');
 });
 
-test('package.json version is aligned to 0.69.0, private stays true', () => {
+test('package.json version is aligned to 0.69.1, private stays true', () => {
   const pkg = JSON.parse(fs.readFileSync(PACKAGE_JSON_PATH, 'utf8'));
-  assert.equal(pkg.version, '0.69.0');
+  assert.equal(pkg.version, '0.69.1');
   assert.equal(pkg.private, true);
 });
 
@@ -49,7 +49,7 @@ test('index.html loads app/version.js and does not hardcode the display version 
   const el = html.match(/<span id="splashVersion"[^>]*>([^<]*)<\/span>/);
   assert.ok(el, 'expected #splashVersion element in the splash markup');
   assert.equal(el[1], '', '#splashVersion must start empty; the value comes from JoshuaVersion at runtime');
-  assert.ok(!/v\.\s*0\.69/.test(html), 'the display version string must not be hardcoded anywhere in index.html');
+  assert.ok(!/v\.\s*0\.69\.1/.test(html), 'the display version string must not be hardcoded anywhere in index.html');
 });
 
 test('game.js reads the display version from window.JoshuaVersion, unconditionally on every splash render (both languages)', () => {
@@ -67,7 +67,7 @@ test('no hardcoded duplicates of the version strings anywhere in src/ outside ve
   const offenders = [];
   for (const f of files) {
     const text = fs.readFileSync(f, 'utf8');
-    if (/0\.69\.0/.test(text) || /v\.\s*0\.69/.test(text)) offenders.push(path.relative(SRC_DIR, f));
+    if (/0\.69\.1/.test(text) || /v\.\s*0\.69\.1/.test(text)) offenders.push(path.relative(SRC_DIR, f));
   }
   assert.deepEqual(offenders, [], 'version strings must only live in src/app/version.js');
 });

@@ -84,12 +84,12 @@ test.describe('splash screen layout', () => {
     expect(Math.abs(rightGap - g.paddingRight)).toBeLessThan(10);
   });
 
-  test('splashVersion is visible and shows "v. 0.69", in both languages', async ({ page }) => {
+  test('splashVersion is visible and shows "v. 0.69.1", in both languages', async ({ page }) => {
     for (const qs of ['', '?lang=it']) {
       await page.goto('/' + qs);
       const version = page.locator('#splashVersion');
       await expect(version).toBeVisible();
-      await expect(version).toHaveText('v. 0.69');
+      await expect(version).toHaveText('v. 0.69.1');
     }
   });
 
@@ -173,12 +173,12 @@ test.describe('splash screen layout', () => {
     await page.locator('#langSwitchLink').click();
     await expect(page).toHaveURL(/lang=it/);
     await expect(page.locator('#langSwitchLink')).toHaveText('EN');
-    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69');
+    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69.1');
 
     await page.locator('#langSwitchLink').click();
     await expect(page).toHaveURL(/lang=en/);
     await expect(page.locator('#langSwitchLink')).toHaveText('IT');
-    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69');
+    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69.1');
   });
 
   test('after BOOT the splash disappears; after EXIT it reappears with the language selector intact', async ({ page }) => {

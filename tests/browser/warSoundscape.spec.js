@@ -159,7 +159,7 @@ test.describe('GLOBAL THERMONUCLEAR WAR: soundscape lifecycle inside the real ap
     // Splash layout/IT-EN selector must be exactly as the layout fix left
     // them — this task did not touch the splash at all.
     await expect(page.locator('#langSwitchLink')).toBeVisible();
-    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69');
+    await expect(page.locator('#splashVersion')).toHaveText('v. 0.69.1');
     const html = await page.content();
     expect(html).not.toMatch(/media-lab/);
   });

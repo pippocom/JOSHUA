@@ -1,6 +1,6 @@
 # JOSHUA Terminal
 
-**Versione 0.69.0** · [Read this document in English](README.md)
+**Versione 0.69.1** · [Read this document in English](README.md)
 
 Un terminale rétro che si gioca nel browser, tributo a *WarGames* (1983). Funziona interamente lato client: nessun backend, nessuno stato lato server e nessun passo di build necessario per eseguirlo.
 
@@ -60,7 +60,7 @@ make test          # test unitari/di regressione (veloci)
 make check         # test unitari + suite browser Chromium e WebKit
 make serve         # serve src/ su http://localhost:4173
 make build         # dist/standalone/ + dist/pippo.com/ (EN + IT) + dist/build-info.json
-make package       # dist/joshua-0.69.0.tar.gz (archivio di rilascio standalone)
+make package       # dist/joshua-0.69.1.tar.gz (archivio di rilascio standalone)
 make clean         # rimuove solo dist/
 ```
 
@@ -107,4 +107,4 @@ Concept originale e sviluppo di Marco Iannacone, pubblicato originariamente su [
 
 ## Stato del progetto
 
-Questa è la versione **0.69.0**, la prima release pubblica open source. L'applicazione è giocabile dall'inizio alla fine, con localizzazione EN/IT, test automatici unitari e browser, miglioramenti di accessibilità e un flusso di build/pacchetto riproducibile.
+Questa è la versione **0.69.1**. L'applicazione è giocabile dall'inizio alla fine, con localizzazione EN/IT, test automatici unitari e browser, miglioramenti di accessibilità e un flusso di build/pacchetto riproducibile.

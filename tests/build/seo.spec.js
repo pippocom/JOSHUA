@@ -80,7 +80,7 @@ test('EN JSON-LD is inline, parses, and describes JOSHUA as an open-source Softw
   expect(json.name).toBe('JOSHUA');
   expect(json.author).toEqual({ '@type': 'Person', 'name': 'Marco Iannacone' });
   expect(json.inLanguage).toBe('en');
-  expect(json.softwareVersion).toBe('0.69.0');
+  expect(json.softwareVersion).toBe('0.69.1');
   expect(json.url).toBe(EN_URL);
   expect(json.license).toContain('agpl');
   expect(json.isAccessibleForFree).toBe(true);
@@ -95,7 +95,7 @@ test('IT JSON-LD is inline, localized, and uses the IT URL', async ({ page }) =>
   expect(json['@type']).toBe('SoftwareApplication');
   expect(json.inLanguage).toBe('it');
   expect(json.url).toBe(IT_URL);
-  expect(json.softwareVersion).toBe('0.69.0');
+  expect(json.softwareVersion).toBe('0.69.1');
   expect(json.description).toContain('tributo');
   expect(JSON.stringify(json)).not.toMatch(/official|endorsed|licensed by MGM|United Artists/i);
 });

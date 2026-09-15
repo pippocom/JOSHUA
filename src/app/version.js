@@ -18,7 +18,7 @@
   'use strict';
 
   return {
-    semver: '0.69.0',
-    displayVersion: 'v. 0.69'
+    semver: '0.69.1',
+    displayVersion: 'v. 0.69.1'
   };
 });
