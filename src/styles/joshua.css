@@ -901,3 +901,95 @@ body {
     transition: none;
   }
 }
+
+/* JOSHUA mobile warning overlay (see src/app/mobile-warning.js). The overlay
+   is created at runtime, but its styles live here rather than being injected
+   inline because the strict default-src 'self' CSP forbids inline <style>.
+   `text-transform: none` restores mixed-case copy in a body that is
+   deliberately uppercased everywhere else. */
+#pippo-mobile-warning {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, .72);
+  color: #d7ffe0;
+  font-family: var(--mono);
+  text-transform: none;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-panel {
+  width: min(560px, 100%);
+  border: 1px solid rgba(108, 255, 141, .38);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(108, 255, 141, .08), transparent 34%),
+    rgba(6, 18, 10, .97);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
+  overflow: hidden;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(108, 255, 141, .20);
+  color: rgba(215, 255, 224, .72);
+  font-size: 13px;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  background: #ff5f57;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-dot:nth-child(2) {
+  background: #ffbd2e;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-dot:nth-child(3) {
+  background: #28c840;
+}
+
+#pippo-mobile-warning .pippo-mobile-warning-body {
+  padding: 20px;
+}
+
+#pippo-mobile-warning h2 {
+  margin: 0 0 14px;
+  color: #f1fff4;
+  font-size: clamp(21px, 6vw, 30px);
+  line-height: 1.1;
+  letter-spacing: .02em;
+}
+
+#pippo-mobile-warning p {
+  margin: 0 0 13px;
+  color: rgba(232, 255, 232, .88);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#pippo-mobile-warning button {
+  margin-top: 8px;
+  width: 100%;
+  border: 1px solid rgba(108, 255, 141, .45);
+  border-radius: 999px;
+  background: transparent;
+  color: #d7ffe0;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+#pippo-mobile-warning button:hover,
+#pippo-mobile-warning button:focus-visible {
+  border-color: #6cff8d;
+  color: #f1fff4;
+  outline: none;
+}
